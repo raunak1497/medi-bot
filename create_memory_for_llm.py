@@ -24,3 +24,7 @@ def create_chunks(extracted_data):
 text_chunks = create_chunks(documents)
 print("Length of text chunks", len(text_chunks))
 
+#Create vector embeddings
+def get_embedding_model():
+    embedding_model = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
+    return embedding_model
