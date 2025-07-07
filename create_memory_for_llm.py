@@ -1,6 +1,7 @@
 from langchain_community.document_loaders import PyPDFLoader, DirectoryLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_community.vectorstores import FAISS
 from nltk.corpus.reader import documents
 
 #Step 1: Load RAW Pdfs
@@ -31,3 +32,7 @@ def get_embedding_model():
 
 embedding_model = get_embedding_model()
 
+#Step 4: Store embedding in FAISS
+DB_FAISS_PATH = "vectorstore/db_faiss"
+db = FAISS.from_documents(text_chunks, embedding_model)
+db.save_local(DB_FAISS_PATH)
